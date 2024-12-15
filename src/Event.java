@@ -37,4 +37,11 @@ public class Event {
         return this.bookedSeats;
     }
 
+    public void book(int seatsToBook){
+        this.bookedSeats += seatsToBook;
+    }
+
+    public void unbook(int seatsToUnbook){
+        this.bookedSeats -= seatsToUnbook;
+    }
 }
