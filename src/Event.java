@@ -1,14 +1,16 @@
+import java.time.LocalDate;
+
 public class Event {
     
 
     private String title;
-    private String date;
-    private int totalSeats;
+    private LocalDate date;
+    private final int totalSeats;
     private int bookedSeats = 0; //initially evry event will always have 0 booked seats
 
-    public Event(String title, String date, int totalSeats){
+    public Event(String title, int year, int month, int dayOfMonth, int totalSeats){
         this.title = title;
-        this.date = date;
+        this.date = LocalDate.of(year, month, dayOfMonth);
         this.totalSeats = totalSeats;
     }
 
@@ -20,12 +22,12 @@ public class Event {
         this.title = title;
     }
 
-    public String getDate(){
+    public LocalDate getDate(){
         return this.date;
     }
 
-    public void setDate(String date){
-        this.date = date;
+    public void setDate(int year, int month, int dayOfMonth){
+        this.date = LocalDate.of(year, month, dayOfMonth);
     }
     public int getTotalSeats(){
         return this.totalSeats;
