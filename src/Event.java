@@ -12,5 +12,27 @@ public class Event {
         this.totalSeats = totalSeats;
     }
 
+    public String getTitle(){
+        return this.title;
+    }
+
+    public void setTitle(String title){
+        this.title = title;
+    }
+
+    public String getDate(){
+        return this.date;
+    }
+
+    public void setDate(String date){
+        this.date = date;
+    }
+    public int getTotalSeats(){
+        return this.totalSeats;
+    }
+
+    public int getBookedSeats(){
+        return this.bookedSeats;
+    }
 
 }
