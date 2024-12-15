@@ -1,8 +1,11 @@
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 
 public class Event {
     
 
+    private static final DateTimeFormatter formatter = null;
     private String title;
     private LocalDate date;
     private final int totalSeats;
@@ -43,5 +46,11 @@ public class Event {
 
     public void unbook(int seatsToUnbook){
         this.bookedSeats -= seatsToUnbook;
+    }
+
+    //return the formatted date and the title
+    @Override
+    public String toString(){
+        return this.date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)) + " - " + this.title;
     }
 }
