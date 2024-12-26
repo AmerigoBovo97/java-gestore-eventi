@@ -3,11 +3,11 @@ import java.time.LocalTime;
 public class Concert extends Event{
     
     private LocalTime time;
-    private float price;
+    private double price;
 
-    public Concert(String title, int year, int month, int dayOfMonth, int totalSeats, LocalTime time, float price){
+    public Concert(String title, int year, int month, int dayOfMonth, int totalSeats, String time, double price){
         super(title, year, month, dayOfMonth, totalSeats);
-        this.time = time;
+        this.time = LocalTime.parse(time);
         this.price = price;
     }
 
@@ -19,7 +19,7 @@ public class Concert extends Event{
         this.time = time;
     }
 
-    public float getPrice(){
+    public double getPrice(){
         return this.price;
     }
 

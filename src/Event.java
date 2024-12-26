@@ -5,15 +5,18 @@ import java.time.format.FormatStyle;
 public class Event {
     
 
-    private static final DateTimeFormatter formatter = null;
     private String title;
     private LocalDate date;
     private final int totalSeats;
     private int bookedSeats = 0; //initially evry event will always have 0 booked seats
 
-    public Event(String title, int year, int month, int dayOfMonth, int totalSeats){
+    public Event(String title, int year, int month, int dayOfMonth, int totalSeats) throws IllegalArgumentException{
+        LocalDate date = LocalDate.of(year, month, dayOfMonth);
+        if (isPast(date)){
+            throw new IllegalArgumentException("The specified date is in the past");
+        }
         this.title = title;
-        this.date = LocalDate.of(year, month, dayOfMonth);
+        this.date = date;
         this.totalSeats = totalSeats;
     }
 
@@ -52,5 +55,10 @@ public class Event {
     @Override
     public String toString(){
         return this.date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)) + " - " + this.title;
+    }
+
+    public static boolean isPast (LocalDate date){
+        LocalDate today = LocalDate.now();
+        return today.isAfter(date);
     }
 }
