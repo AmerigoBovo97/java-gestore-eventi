@@ -32,7 +32,10 @@ public abstract class Event {
         return this.date;
     }
 
-    public void setDate(int year, int month, int dayOfMonth){
+    public void setDate(int year, int month, int dayOfMonth) throws IllegalArgumentException{
+        if (isPast(date)){
+            throw new IllegalArgumentException("The specified date is in the past");
+        }
         this.date = LocalDate.of(year, month, dayOfMonth);
     }
     public int getTotalSeats(){
