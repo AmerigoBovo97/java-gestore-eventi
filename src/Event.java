@@ -12,8 +12,8 @@ public class Event {
 
     public Event(String title, int year, int month, int dayOfMonth, int totalSeats) throws IllegalArgumentException{
         LocalDate date = LocalDate.of(year, month, dayOfMonth);
-        if (isPast(date)){
-            throw new IllegalArgumentException("The specified date is in the past");
+        if (isPast(date) || totalSeats <= 0){
+            throw new IllegalArgumentException("please insert valid values");
         }
         this.title = title;
         this.date = date;
