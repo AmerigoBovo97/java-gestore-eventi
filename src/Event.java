@@ -48,10 +48,13 @@ public class Event {
 
     public void book(int seatsToBook)throws IllegalArgumentException{
         int totalBokkedSeats = this.bookedSeats + seatsToBook;
+        if (isPast(this.date)) {
+            throw new IllegalArgumentException("You can not book seats for a past event");
+        }
         if (totalBokkedSeats > this.totalSeats || seatsToBook <= 0){
             throw new IllegalArgumentException("You can not book that amount fo seats");
         }
-        this.bookedSeats = totalBokkedSeats;
+        this.bookedSeats += totalBokkedSeats;
     }
 
     public void unbook(int seatsToUnbook)throws IllegalArgumentException{
