@@ -46,11 +46,19 @@ public abstract class Event {
         return this.bookedSeats;
     }
 
-    public void book(int seatsToBook){
-        this.bookedSeats += seatsToBook;
+    public void book(int seatsToBook)throws IllegalArgumentException{
+        int totalBokkedSeats = this.bookedSeats + seatsToBook;
+        if (totalBokkedSeats > this.totalSeats || seatsToBook <= 0){
+            throw new IllegalArgumentException("You can not book that amount fo seats");
+        }
+        this.bookedSeats = totalBokkedSeats;
     }
 
-    public void unbook(int seatsToUnbook){
+    public void unbook(int seatsToUnbook)throws IllegalArgumentException{
+        int totalBokkedSeats = this.bookedSeats - seatsToUnbook;
+        if (totalBokkedSeats < 0  || seatsToUnbook <= 0){
+            throw new IllegalArgumentException("You can not book that amount fo seats");
+        }
         this.bookedSeats -= seatsToUnbook;
     }
 
