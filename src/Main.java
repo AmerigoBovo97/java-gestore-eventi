@@ -37,6 +37,9 @@ public class Main {
             } catch(IllegalArgumentException e){
                 System.out.println("Purtroppo hai inserito valori non validi, riprova");
                 scanner.nextLine();
+            }catch(java.time.DateTimeException e){
+                System.out.println("La data che hai inserito non è corretta");
+                scanner.nextLine();
             }catch(InputMismatchException e){
                 System.out.println("Attento a non inserire caratteri non numerici quando ti viene richiesto un numero");
                 scanner.nextLine();

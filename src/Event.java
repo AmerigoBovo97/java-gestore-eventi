@@ -1,3 +1,4 @@
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
@@ -15,9 +16,14 @@ public class Event {
         if (isPast(date) || totalSeats <= 0){
             throw new IllegalArgumentException("please insert valid values");
         }
-        this.title = title;
-        this.date = date;
-        this.totalSeats = totalSeats;
+        try{
+            this.title = title;
+            this.date = date;
+            this.totalSeats = totalSeats;
+        }catch(java.time.DateTimeException e){
+            throw new DateTimeException("please inser valid date");
+        }
+        
     }
 
     public String getTitle(){
