@@ -1,6 +1,8 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
+
     
     public static void main(String[] args) {
         
@@ -28,11 +30,16 @@ public class Main {
                 int totalSeats = scanner.nextInt();
     
                 Event event = new Event(title, year, month, day, totalSeats);
+                scanner.nextLine();
                 
                 error = false;
     
             } catch(IllegalArgumentException e){
                 System.out.println("Purtroppo hai inserito valori non validi, riprova");
+                scanner.nextLine();
+            }catch(InputMismatchException e){
+                System.out.println("Attento a non inserire caratteri non numerici quando ti viene richiesto un numero");
+                scanner.nextLine();
             }
 
         }
