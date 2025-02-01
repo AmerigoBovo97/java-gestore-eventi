@@ -5,25 +5,16 @@ import java.time.format.FormatStyle;
 
 public class Event {
     
-
     private String title;
     private LocalDate date;
     private final int totalSeats;
     private int bookedSeats = 0; //initially evry event will always have 0 booked seats
 
-    public Event(String title, int year, int month, int dayOfMonth, int totalSeats) throws IllegalArgumentException{
-        LocalDate date = LocalDate.of(year, month, dayOfMonth);
-        if (isPast(date) || totalSeats <= 0){
-            throw new IllegalArgumentException("please insert valid values");
-        }
-        try{
-            this.title = title;
-            this.date = date;
-            this.totalSeats = totalSeats;
-        }catch(java.time.DateTimeException e){
-            throw new DateTimeException("please inser valid date");
-        }
-        
+    public Event(String title, LocalDate date, int totalSeats){
+        this.date = date;
+        this.title = title;
+        this.date = date;
+        this.totalSeats = totalSeats;        
     }
 
     public String getTitle(){
@@ -38,12 +29,9 @@ public class Event {
         return this.date;
     }
 
-    public void setDate(int year, int month, int dayOfMonth) throws IllegalArgumentException{
-        if (isPast(date)){
-            throw new IllegalArgumentException("The specified date is in the past");
+    public void setDate(LocalDate date){
+        this.date = date;
         }
-        this.date = LocalDate.of(year, month, dayOfMonth);
-    }
     public int getTotalSeats(){
         return this.totalSeats;
     }
@@ -52,34 +40,26 @@ public class Event {
         return this.bookedSeats;
     }
 
-    public void book(int seatsToBook)throws IllegalArgumentException{
-        if (isPast(this.date)) {
-            throw new IllegalArgumentException("You can not book seats for a past event");
-        }
-        if (this.bookedSeats > seatsToBook || this.totalSeats <= 0){
-            throw new IllegalArgumentException("You can not book that amount fo seats");
-        }
+    public int getAvailableSeats(){
+        return this.totalSeats - this.bookedSeats;
+    }
+
+    public void book(int seatsToBook){
         this.bookedSeats += seatsToBook;
     }
 
-    public void unbook(int seatsToUnbook)throws IllegalArgumentException{
-        if (isPast(this.date)) {
-            throw new IllegalArgumentException("You can not unbook seats for a past event.");
-        }
-        if (this.bookedSeats - seatsToUnbook < 0 || seatsToUnbook <= 0){
-            throw new IllegalArgumentException("You can not unbook that amount fo seats");
-        }
+    public void unbook(int seatsToUnbook){
         this.bookedSeats -= seatsToUnbook;
+    }
+
+    public void printSeats(){
+        System.out.println("I posti prenotati sono: " + this.getBookedSeats());
+        System.out.println("i posti disponibili sono: " + this.getAvailableSeats());
     }
 
     //return the formatted date and the title
     @Override
     public String toString(){
         return this.date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)) + " - " + this.title;
-    }
-
-    public static boolean isPast (LocalDate date){
-        LocalDate today = LocalDate.now();
-        return today.isAfter(date);
     }
 }

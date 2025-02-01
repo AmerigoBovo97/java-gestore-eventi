@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.time.LocalTime;  
 
 public class Concert extends Event{
@@ -5,12 +6,9 @@ public class Concert extends Event{
     private LocalTime time;
     private double price;
 
-    public Concert(String title, int year, int month, int dayOfMonth, int totalSeats, String time, double price) throws IllegalArgumentException{
-        if(price <= 0){
-            throw new IllegalArgumentException("please insert valid values");
-        }
-        super(title, year, month, dayOfMonth, totalSeats);
-        this.time = LocalTime.parse(time);
+    public Concert(String title, LocalDate date, int totalSeats, LocalTime time, double price){
+        super(title, date, totalSeats);
+        this.time = time;
         this.price = price;
     }
 
@@ -26,10 +24,7 @@ public class Concert extends Event{
         return this.price;
     }
 
-    public void setPrice(float price) throws IllegalArgumentException{
-        if(price <= 0){
-            throw new IllegalArgumentException("please insert valid values");
-        }
+    public void setPrice(float price){
         this.price = price;
     }
 }
