@@ -1,5 +1,7 @@
 import java.time.LocalDate;
-import java.time.LocalTime;  
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;  
 
 public class Concert extends Event{
     
@@ -26,5 +28,10 @@ public class Concert extends Event{
 
     public void setPrice(float price){
         this.price = price;
+    }
+
+    @Override
+    public String toString(){
+        return this.getDate().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)) + " " + this.getTime() +" - " + this.getTitle() + " - "  + this.price + "Euro";
     }
 }

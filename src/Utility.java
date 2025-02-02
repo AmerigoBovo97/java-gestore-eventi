@@ -116,56 +116,66 @@ public final class Utility {
 
     public static void askToBook(Event event){
 
-        Scanner scanner = new Scanner(System.in);
+        if (!isPast(event.getDate())) {
+            Scanner scanner = new Scanner(System.in);
 
-        while (true) {
-            try{
-                System.out.println("Quanti posti vuoi prenotare?");
-                int seatsToBook = scanner.nextInt();
-                scanner.nextLine();
-    
-                if (seatsToBook < 1) {
-                    System.out.println("Il numero di posti da prenotare deve essere maggiore di 0.");
-                }else if (seatsToBook <= event.getAvailableSeats()) {
-                    event.book(seatsToBook);
-                    break;
-                }else{
-                    System.out.println("Purtroppo il numero massimo di posti disponibili è " + event.getAvailableSeats());
+            while (true) {
+                try{
+                    System.out.println("Quanti posti vuoi prenotare?");
+                    int seatsToBook = scanner.nextInt();
+                    scanner.nextLine();
+        
+                    if (seatsToBook < 1) {
+                        break;
+                    }else if (seatsToBook <= event.getAvailableSeats()) {
+                        event.book(seatsToBook);
+                        break;
+                    }else{
+                        System.out.println("Purtroppo il numero massimo di posti disponibili è " + event.getAvailableSeats());
+                    }
+                }catch(Exception e){
+                    System.out.println("per favore inserisci un valore valido.");
+                    scanner.nextLine();
                 }
-            }catch(Exception e){
-                System.out.println("per favore inserisci un valore valido.");
-                scanner.nextLine();
-            }
-            
+                
 
+            }
+        }else{
+            System.out.println("Purtroppo questo evento è già passato e non è piu possibile effettuare prenotazioni.");
         }
+
+        
     }
 
 
     public static void askToUnbook(Event event){
 
-        Scanner scanner = new Scanner(System.in);
+        if (!isPast(event.getDate())) {
+            Scanner scanner = new Scanner(System.in);
 
-        while (true) {
-            try{
-                System.out.println("Quanti posti vuoi disdire?");
-                int seatsToUnook = scanner.nextInt();
-                scanner.nextLine();
+            while (true) {
+                try{
+                    System.out.println("Quanti posti vuoi disdire?");
+                    int seatsToUnook = scanner.nextInt();
+                    scanner.nextLine();
 
-                if (seatsToUnook < 1) {
-                    System.out.println("Il numero di posti da disdire deve essere maggiore di 0.");
-                }else if (seatsToUnook <= event.getBookedSeats()) {
-                    event.unbook(seatsToUnook);
-                    break;
-                }else{
-                    System.out.println("Purtroppo il numero massimo di posti che si possono disdire è " + event.getBookedSeats());
+                    if (seatsToUnook < 1) {
+                        break;
+                    }else if (seatsToUnook <= event.getBookedSeats()) {
+                        event.unbook(seatsToUnook);
+                        break;
+                    }else{
+                        System.out.println("Purtroppo il numero massimo di posti che si possono disdire è " + event.getBookedSeats());
+                    }
+                }catch(Exception e){
+                    System.out.println("per favore inserisci un valore valido.");
+                    scanner.nextLine();
                 }
-            }catch(Exception e){
-                System.out.println("per favore inserisci un valore valido.");
-                scanner.nextLine();
-            }
-            
+                
 
+            }
+        }else{
+            System.out.println("Purtroppo questo evento è già passato e non è piu possibile cancellare prenotazioni.");
         }
     }
 

@@ -28,6 +28,7 @@ public class Main {
         event.printSeats();
         Utility.askToUnbook(event);
         event.printSeats();
+        System.out.println(event);
         
     }
 }
